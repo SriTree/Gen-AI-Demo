@@ -10,7 +10,7 @@ import {
   TableHead,
   TableCell,
 } from "@/components/ui/table";
-import DataService, { Prompt } from "@/app/services/DataService";
+import DataService from "@/app/services/DataService";
 
 interface LLMData {
   llm: string;

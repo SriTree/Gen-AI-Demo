@@ -67,7 +67,13 @@ class DataService {
     const { data, error } = await supabase
       .from("jailbreaks")
       .select("*")
-      .eq("llm", llm);
+      .eq("success_flag", true) // Ensure success_flag is true
+      .eq("llm", llm)
+      .not("category", "is", null) // Ensure category is not null
+      .not("query", "is", null) // Ensure query is not null
+      .not("successful_prompt", "is", null) // Ensure successful_prompt is not null
+      .not("response", "is", null) // Ensure response is not null
+      .not("feedback", "is", null); // Ensure feedback is not null
 
     if (error) {
       console.error(`Error fetching data for LLM ${llm}:`, error.message);

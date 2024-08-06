@@ -22,7 +22,7 @@ interface Props {
 }
 
 const Table: React.FC<Props> = ({ data }) => {
-  const [expandedCells, setExpandedCells] = useState<{
+  const [expandedRows, setExpandedRows] = useState<{
     [key: string]: boolean;
   }>({});
 
@@ -31,34 +31,10 @@ const Table: React.FC<Props> = ({ data }) => {
     return words.length > 60 ? `${words.slice(0, 60).join(" ")}...` : response;
   };
 
-  const formatValue = (value: any) => {
-    if (typeof value === "number" && value === 0) {
-      return "-";
-    }
-    if (typeof value === "string" && parseFloat(value) === 0) {
-      return "-";
-    }
-    return value;
-  };
-
   const columns: ColumnDef<Prompt>[] = [
-    {
-      accessorKey: "category",
-      header: "Category",
-      cell: ({ row }) => <span>{formatValue(row.original.category)}</span>,
-    },
-    {
-      accessorKey: "query",
-      header: "Query",
-      cell: ({ row }) => <span>{formatValue(row.original.query)}</span>,
-    },
-    {
-      accessorKey: "successful_prompt",
-      header: "Successful Prompt",
-      cell: ({ row }) => (
-        <span>{formatValue(row.original.successful_prompt)}</span>
-      ),
-    },
+    { accessorKey: "category", header: "Category" },
+    { accessorKey: "query", header: "Query" },
+    { accessorKey: "successful_prompt", header: "Successful Prompt" },
     {
       accessorKey: "response",
       header: "Response",
@@ -68,11 +44,7 @@ const Table: React.FC<Props> = ({ data }) => {
         </div>
       ),
     },
-    {
-      accessorKey: "feedback",
-      header: "Feedback",
-      cell: ({ row }) => <span>{formatValue(row.original.feedback)}</span>,
-    },
+    { accessorKey: "feedback", header: "Feedback" },
   ];
 
   const table = useReactTable({
@@ -81,10 +53,10 @@ const Table: React.FC<Props> = ({ data }) => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const handleCellClick = (cellId: string) => {
-    setExpandedCells((prev) => ({
+  const handleRowClick = (rowId: string) => {
+    setExpandedRows((prev) => ({
       ...prev,
-      [cellId]: !prev[cellId],
+      [rowId]: !prev[rowId],
     }));
   };
 
@@ -110,28 +82,32 @@ const Table: React.FC<Props> = ({ data }) => {
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows.map((row) => (
-              <TableRow key={row.id} className="cursor-pointer">
-                {row.getVisibleCells().map((cell) => {
-                  const cellId = `${row.id}-${cell.id}`;
-                  const isExpanded = expandedCells[cellId];
-                  return (
-                    <TableCell
-                      key={cell.id}
-                      className={`py-4 px-6 border-b border-gray-700 text-white ${
-                        isExpanded ? "whitespace-normal" : "truncate max-w-xs"
-                      }`}
-                      onClick={() => handleCellClick(cellId)}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            ))}
+            {table.getRowModel().rows.map((row) => {
+              const isExpanded = expandedRows[row.id];
+              return (
+                <TableRow
+                  key={row.id}
+                  className="cursor-pointer"
+                  onClick={() => handleRowClick(row.id)}
+                >
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <TableCell
+                        key={cell.id}
+                        className={`py-4 px-6 border-b border-gray-700 text-white ${
+                          isExpanded ? "whitespace-normal" : "truncate max-w-xs"
+                        }`}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    );
+                  })}
+                </TableRow>
+              );
+            })}
           </TableBody>
         </ShadTable>
       </div>
