@@ -53,6 +53,10 @@ const categorize = (category: string) => {
   return null;
 };
 
+const formatValue = (value: number) => {
+  return value === 0 ? "-" : value.toFixed(2);
+};
+
 const LLMTable: React.FC = () => {
   const [llmData, setLLMData] = useState<LLMData[]>([]);
   const router = useRouter();
@@ -161,16 +165,16 @@ const LLMTable: React.FC = () => {
                 {data.llm}
               </TableCell>
               <TableCell className="bg-gray-800 text-green-500">
-                {data.averageQueries.toFixed(2)}
+                {formatValue(data.averageQueries)}
               </TableCell>
               <TableCell className="bg-gray-800 text-yellow-500">
-                {data.avgQueriesNationalSecurity.toFixed(2)}
+                {formatValue(data.avgQueriesNationalSecurity)}
               </TableCell>
               <TableCell className="bg-gray-800 text-yellow-500">
-                {data.avgQueriesToxicity.toFixed(2)}
+                {formatValue(data.avgQueriesToxicity)}
               </TableCell>
               <TableCell className="bg-gray-800 text-red-500">
-                {data.avgQueriesVirusMalware.toFixed(2)}
+                {formatValue(data.avgQueriesVirusMalware)}
               </TableCell>
               <TableCell className="bg-gray-800 text-center">
                 <button

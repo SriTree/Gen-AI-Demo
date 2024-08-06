@@ -17,7 +17,7 @@ const ChatSimulationPage: React.FC = () => {
     if (model) {
       const fetchData = async () => {
         try {
-          const result = await DataService.fetchMostQueriedPromptByLLM(
+          const result = await DataService.fetchRandomSuccessfulPromptByLLM(
             model as string
           );
           setData(result);
@@ -139,7 +139,7 @@ const ChatSimulationPage: React.FC = () => {
                 </div>
                 <div className="flex items-center">
                   <span className="inline-block w-4 h-4 bg-red-500 mr-2"></span>
-                  <span>Final Response</span>
+                  <span>Jailbroken Response</span>
                 </div>
               </div>
             </div>

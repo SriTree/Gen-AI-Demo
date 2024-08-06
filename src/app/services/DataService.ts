@@ -32,11 +32,12 @@ class DataService {
     })) as Prompt[];
   }
 
-  static async fetchMostQueriedPromptByLLM(llm: string): Promise<Prompt> {
+  static async fetchRandomSuccessfulPromptByLLM(llm: string): Promise<Prompt> {
     const { data, error } = await supabase
       .from("jailbreaks")
       .select("*")
-      .eq("llm", llm);
+      .eq("llm", llm)
+      .eq("success_flag", true);
 
     if (error) {
       console.error("Error fetching data:", error.message);
@@ -44,30 +45,22 @@ class DataService {
     }
 
     if (!data || data.length === 0) {
-      throw new Error("No data found for the given LLM");
-    }
-
-    // Sort the data by query in descending order
-    const sortedData = data
-      .map((item) => ({
-        ...item,
-        query: parseInt(item.query, 10),
-        attack_hist: Array.isArray(item.attack_hist)
-          ? item.attack_hist
-          : [item.attack_hist].flat(),
-      }))
-      .sort((a, b) => b.query - a.query);
-
-    // Find the first prompt with a success_flag set to true
-    const validPrompt = sortedData.find((item) => item.success_flag === true);
-
-    if (!validPrompt) {
       throw new Error(
-        "No valid data found with success_flag set to true for the given LLM"
+        "No data found with success_flag set to true for the given LLM"
       );
     }
 
-    return validPrompt as Prompt;
+    // Get a random index
+    const randomIndex = Math.floor(Math.random() * data.length);
+
+    const randomPrompt = data[randomIndex];
+
+    // Ensure attack_hist is an array
+    randomPrompt.attack_hist = Array.isArray(randomPrompt.attack_hist)
+      ? randomPrompt.attack_hist
+      : [randomPrompt.attack_hist].flat();
+
+    return randomPrompt as Prompt;
   }
 
   static async fetchPromptsByLLM(llm: string): Promise<Prompt[]> {

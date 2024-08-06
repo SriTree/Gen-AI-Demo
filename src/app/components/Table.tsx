@@ -31,10 +31,34 @@ const Table: React.FC<Props> = ({ data }) => {
     return words.length > 60 ? `${words.slice(0, 60).join(" ")}...` : response;
   };
 
+  const formatValue = (value: any) => {
+    if (typeof value === "number" && value === 0) {
+      return "-";
+    }
+    if (typeof value === "string" && parseFloat(value) === 0) {
+      return "-";
+    }
+    return value;
+  };
+
   const columns: ColumnDef<Prompt>[] = [
-    { accessorKey: "category", header: "Category" },
-    { accessorKey: "query", header: "Query" },
-    { accessorKey: "successful_prompt", header: "Successful Prompt" },
+    {
+      accessorKey: "category",
+      header: "Category",
+      cell: ({ row }) => <span>{formatValue(row.original.category)}</span>,
+    },
+    {
+      accessorKey: "query",
+      header: "Query",
+      cell: ({ row }) => <span>{formatValue(row.original.query)}</span>,
+    },
+    {
+      accessorKey: "successful_prompt",
+      header: "Successful Prompt",
+      cell: ({ row }) => (
+        <span>{formatValue(row.original.successful_prompt)}</span>
+      ),
+    },
     {
       accessorKey: "response",
       header: "Response",
@@ -44,7 +68,11 @@ const Table: React.FC<Props> = ({ data }) => {
         </div>
       ),
     },
-    { accessorKey: "feedback", header: "Feedback" },
+    {
+      accessorKey: "feedback",
+      header: "Feedback",
+      cell: ({ row }) => <span>{formatValue(row.original.feedback)}</span>,
+    },
   ];
 
   const table = useReactTable({
