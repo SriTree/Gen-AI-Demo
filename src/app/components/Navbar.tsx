@@ -51,15 +51,18 @@ const Navbar: React.FC = () => {
   }, [handleOutsideClick]);
 
   return (
-    <nav className="bg-gray-800 p-4">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <nav className="bg-gray-800 p-4 w-full fixed top-0 left-0 z-50">
+      <div className="max-w-full mx-auto flex justify-between items-center">
+        {/* Left-aligned Logo */}
         <div
           onClick={() => router.push("/")}
-          className="text-white font-bold text-lg cursor-pointer"
+          className="text-white font-bold text-lg cursor-pointer ml-4"
         >
           LLM Dashboard
         </div>
-        <div className="flex space-x-4">
+
+        {/* Right-aligned Buttons */}
+        <div className="flex space-x-4 mr-4">
           {/* LLM Button with Dropdown */}
           <div className="relative">
             <button

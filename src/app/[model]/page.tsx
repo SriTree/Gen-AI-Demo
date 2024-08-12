@@ -43,7 +43,7 @@ const ModelPage = () => {
     <div className="min-h-screen bg-gray-900 text-white">
       <div className="container mx-auto p-4">
         <div className="flex flex-col items-center">
-          <h1 className="text-3xl font-bold mb-6 w-[100%] text-left mr-24spotis">
+          <h1 className="text-3xl font-bold mb-6 w-[100%] text-left mr-24 mt-20">
             Prompts for LLM: {model}
           </h1>
           <div className="w-[110%]">

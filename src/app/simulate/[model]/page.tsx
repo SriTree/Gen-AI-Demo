@@ -111,8 +111,10 @@ const ChatSimulationPage: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen bg-gray-900 p-5 text-white">
-      <div className="absolute top-4 left-4">
+    <div className="flex flex-col items-center justify-start min-h-screen bg-gray-900 p-5 text-white pt-20">
+      {" "}
+      {/* Add pt-20 or appropriate margin-top */}
+      <div className="absolute top-4 left-4 mt-20">
         {data && (
           <>
             <div>
@@ -150,6 +152,8 @@ const ChatSimulationPage: React.FC = () => {
         )}
       </div>
       <div className="w-full max-w-4xl p-5 mt-24 ml-64">
+        {" "}
+        {/* Adjust margin-top if needed */}
         <div className="flex flex-col space-y-4">
           <AnimatePresence>
             {messages.slice(0, currentMessageIndex).map((message, index) => {
