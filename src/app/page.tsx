@@ -33,9 +33,7 @@ const LandingPage: React.FC = () => {
       {/* Hero Section */}
       <div className="flex flex-col justify-center items-center min-h-screen p-10 bg-gray-900 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-5xl font-bold mb-8">
-            Welcome to the LLM Dashboard
-          </h1>
+          <h1 className="text-5xl font-bold mb-8">Welcome to the SecuLLM</h1>
           <p className="text-lg mb-8">
             Explore how different LLMs perform under various jailbreak
             scenarios. Learn about their safety scores, success rates, and more.

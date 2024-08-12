@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import DataService from "@/app/services/DataService"; // Assuming this service fetches LLM data
+import { ShieldHalf } from "lucide-react"; // Import the ShieldHalf icon
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -53,12 +54,13 @@ const Navbar: React.FC = () => {
   return (
     <nav className="bg-gray-800 p-4 w-full fixed top-0 left-0 z-50">
       <div className="max-w-full mx-auto flex justify-between items-center">
-        {/* Left-aligned Logo */}
+        {/* Left-aligned Logo with Icon */}
         <div
           onClick={() => router.push("/")}
-          className="text-white font-bold text-lg cursor-pointer ml-4"
+          className="flex items-center text-white font-bold text-lg cursor-pointer ml-4"
         >
-          LLM Dashboard
+          SecuLLM
+          <ShieldHalf className="w-6 h-6 mr-2" /> {/* Icon with margin */}
         </div>
 
         {/* Right-aligned Buttons */}
