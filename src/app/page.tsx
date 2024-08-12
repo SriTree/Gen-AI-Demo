@@ -62,7 +62,8 @@ const LandingPage: React.FC = () => {
                 susceptibility by an automatic red teaming bot and the ease by
                 which it was able to jailbreak. Click on any specific LLM in the
                 table below to see a more comprehensive report. Try simulating
-                to see how the bot is jailbreaking these LLMs!
+                to see how the bot is jailbreaking these LLMs! (each time you
+                click, there is a new simulation)
               </p>
             </div>
 

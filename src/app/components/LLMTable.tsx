@@ -147,8 +147,7 @@ const LLMTable: React.FC = () => {
           };
         });
 
-        // Sort by descending order of score
-        llmData.sort((a, b) => b.score - a.score);
+        llmData.sort((a, b) => b.score - a.score); // Order by descending score
         setLLMData(llmData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -195,12 +194,12 @@ const LLMTable: React.FC = () => {
               key={data.llm}
               className="bg-gradient-to-r from-gray-800 via-gray-900 to-black"
             >
-              <TableCell className="text-center cursor-pointer relative">
-                <div
-                  className="absolute inset-0 flex items-center justify-center px-4 py-2 bg-blue-500 rounded opacity-0 hover:opacity-100 transition duration-200 ease-in-out"
-                  onClick={() => router.push(`/${data.llm}`)}
-                >
-                  {/* Invisible background div for hover effect */}
+              <TableCell
+                className="text-center relative cursor-pointer"
+                onClick={() => router.push(`/${data.llm}`)}
+              >
+                <div className="absolute inset-0 flex items-center justify-center bg-blue-500 rounded opacity-0 hover:opacity-100 transition duration-200 ease-in-out">
+                  <span className="relative z-10"></span>
                 </div>
                 <span className="relative z-10">{data.llm}</span>
               </TableCell>
