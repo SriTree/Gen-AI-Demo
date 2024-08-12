@@ -137,46 +137,58 @@ const LLMTable: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full overflow-auto bg-gray-900 text-white p-5 rounded-lg shadow-md">
-      <Table className="w-full caption-bottom text-sm">
+    <div className="relative w-full overflow-auto p-5 rounded-lg shadow-md bg-gray-900">
+      <Table className="w-full caption-bottom text-sm text-white">
         <TableHeader>
           <TableRow>
-            <TableHead className="text-left bg-gray-800">LLM</TableHead>
-            <TableHead className="text-left bg-gray-800">Avg Queries</TableHead>
-            <TableHead className="text-left bg-gray-800">
-              Avg Queries (National Security)
+            <TableHead className="text-center bg-gray-700 font-bold">
+              LLM
             </TableHead>
-            <TableHead className="text-left bg-gray-800">
-              Avg Queries (Toxicity)
+            <TableHead className="text-center bg-gray-700 font-bold">
+              Avg Queries
             </TableHead>
-            <TableHead className="text-left bg-gray-800">
-              Avg Queries (Virus/Malware)
+            <TableHead className="text-center bg-gray-700 font-bold">
+              National Security
             </TableHead>
-            <TableHead className="text-left bg-gray-800">Simulate</TableHead>
+            <TableHead className="text-center bg-gray-700 font-bold">
+              Toxicity
+            </TableHead>
+            <TableHead className="text-center bg-gray-700 font-bold">
+              Malware
+            </TableHead>
+            <TableHead className="text-center bg-gray-700 font-bold">
+              Simulate
+            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {llmData.map((data) => (
-            <TableRow key={data.llm}>
-              <TableCell
-                className="bg-gray-800 text-blue-500 cursor-pointer"
-                onClick={() => router.push(`/${data.llm}`)}
-              >
-                {data.llm}
+            <TableRow
+              key={data.llm}
+              className="bg-gradient-to-r from-gray-800 via-gray-900 to-black"
+            >
+              <TableCell className="text-center cursor-pointer relative">
+                <div
+                  className="absolute inset-0 flex items-center justify-center px-4 py-2 bg-blue-500 rounded opacity-0 hover:opacity-100 transition duration-200 ease-in-out"
+                  onClick={() => router.push(`/${data.llm}`)}
+                >
+                  {/* Invisible background div for hover effect */}
+                </div>
+                <span className="relative z-10">{data.llm}</span>
               </TableCell>
-              <TableCell className="bg-gray-800 text-green-500">
+              <TableCell className="text-center">
                 {formatValue(data.averageQueries)}
               </TableCell>
-              <TableCell className="bg-gray-800 text-yellow-500">
+              <TableCell className="text-center">
                 {formatValue(data.avgQueriesNationalSecurity)}
               </TableCell>
-              <TableCell className="bg-gray-800 text-yellow-500">
+              <TableCell className="text-center">
                 {formatValue(data.avgQueriesToxicity)}
               </TableCell>
-              <TableCell className="bg-gray-800 text-red-500">
+              <TableCell className="text-center">
                 {formatValue(data.avgQueriesVirusMalware)}
               </TableCell>
-              <TableCell className="bg-gray-800 text-center">
+              <TableCell className="text-center">
                 <button
                   onClick={() => router.push(`/simulate/${data.llm}`)}
                   className="text-white bg-blue-500 hover:bg-blue-700 px-4 py-2 rounded"

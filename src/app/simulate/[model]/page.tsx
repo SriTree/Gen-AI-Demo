@@ -135,7 +135,10 @@ const ChatSimulationPage: React.FC = () => {
                 </div>
                 <div className="flex items-center">
                   <span className="inline-block w-4 h-4 bg-gray-500 mr-2"></span>
-                  <span>Feedback (not seen by the model)</span>
+                  <span>
+                    Feedback
+                    <div>(not seen by the model)</div>
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <span className="inline-block w-4 h-4 bg-red-500 mr-2"></span>
@@ -146,7 +149,7 @@ const ChatSimulationPage: React.FC = () => {
           </>
         )}
       </div>
-      <div className="w-full max-w-4xl p-5 mt-24">
+      <div className="w-full max-w-4xl p-5 mt-24 ml-64">
         <div className="flex flex-col space-y-4">
           <AnimatePresence>
             {messages.slice(0, currentMessageIndex).map((message, index) => {
