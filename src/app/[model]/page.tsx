@@ -8,8 +8,6 @@ import Table from "@/app/components/Table";
 const ModelPage = () => {
   const { model } = useParams();
   const [data, setData] = useState<Prompt[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (model) {
@@ -20,13 +18,7 @@ const ModelPage = () => {
           console.log("Fetched prompts:", prompts);
           setData(prompts);
         } catch (err) {
-          if (err instanceof Error) {
-            setError(err.message);
-          } else {
-            setError("An unknown error occurred");
-          }
-        } finally {
-          setLoading(false);
+          console.error("Error fetching prompts:", err);
         }
       };
 
@@ -35,9 +27,6 @@ const ModelPage = () => {
       console.log("Model parameter is undefined");
     }
   }, [model]);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white">
