@@ -74,7 +74,7 @@ const Navbar: React.FC = () => {
               }}
               className="text-white hover:bg-blue-700 px-4 py-2 rounded"
             >
-              LLM
+              Report
             </button>
             {isLLMMenuOpen && (
               <div className="absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg z-10">

@@ -31,7 +31,7 @@ const LandingPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Hero Section */}
-      <div className="flex flex-col justify-center items-center min-h-screen p-10 bg-gray-900 text-center">
+      <div className="flex flex-col justify-center items-center min-h-screen p-10 bg-gradient-to-r from-slate-600 via-gray-900 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="text-5xl font-bold mb-8">Welcome to the SecuLLM</h1>
           <p className="text-lg mb-8">
